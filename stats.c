@@ -9,13 +9,17 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.c 
+ * @brief Calculates and prints statistics for a char array.
  *
- * <Add Extended Description Here>
+ * The following statistics is calculated.
+ * - Median
+ * - Mean
+ * - Maximum
+ * - Minimum
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author Johan Jensen
+ * @date 2020-11-08
  *
  */
 
@@ -40,4 +44,31 @@ void main() {
 
 }
 
-/* Add other Implementation File Code Here */
+void print_statistics(char * ptr){
+
+}
+
+void print_array(char * ptr, unsigned int len){
+
+}
+
+char find_median(char * ptr, unsigned int len){
+
+}
+
+char find_mean(char * ptr, unsigned int len){
+
+}
+
+char find_maximum(char * ptr, unsigned int len){
+
+}
+
+char find_minimum(char * ptr, unsigned int len){
+
+}
+
+void sort_array(char * ptr, unsigned int len){
+
+}
+

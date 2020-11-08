@@ -9,32 +9,110 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.h
+ * @brief Calculates and prints statistics for a char array.
  *
- * <Add Extended Description Here>
+ * The following statistics is calculated.
+ * - Median
+ * - Mean
+ * - Maximum
+ * - Minimum
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author Johan Jensen
+ * @date 2020-11-08
  *
  */
 #ifndef __STATS_H__
 #define __STATS_H__
 
-/* Add Your Declarations and Function Comments here */ 
+/**
+ * @brief Prints array statistics.
+ *
+ * Given a pointer to a data array, this will print the statistics.
+ * Including minimum, maximum, median, and mean.
+ *
+ * @param ptr Pointer to char array
+ *
+ * @return void.
+ */
+void print_statistics(char * ptr);
 
 /**
- * @brief <Add Brief Description of Function Here>
+ * @brief Prints an array to the screen.
  *
- * <Add Extended Description Here>
+ * Given a pointer to a char array and a length, it prints the array to
+ * the screen.
  *
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
- * @param <Add InputName> <add description here>
+ * @param ptr Pointer to char array
+ * @param len Array lenght
  *
- * @return <Add Return Informaiton here>
+ * @return void.
  */
+void print_array(char * ptr, unsigned int len);
 
+/**
+ * @brief Finds and returns the median value from a data array.
+ *
+ * Given a pointer to a char array and a length, it finds and returns the
+ * median value.
+ *
+ * @param prt Pointer to char array
+ * @param len Array length
+ *
+ * @return Median value.
+ */
+char find_median(char * ptr, unsigned int len);
+
+/**
+ * @brief Finds and returns the mean value from a data array.
+ *
+ * Given a pointer to a char array and a length, it finds and returns the
+ * mean value.
+ *
+ * @param prt Pointer to char array
+ * @param len Array length
+ *
+ * @return Mean value.
+ */
+char find_mean(char * ptr, unsigned int len);
+ 
+/**
+ * @brief Finds and returns the maximum value from a data array.
+ *
+ * Given a pointer to a char array and a length, it finds and returns the
+ * maximum value.
+ *
+ * @param prt Pointer to char array
+ * @param len Array length
+ *
+ * @return Maximum value.
+ */
+char find_maximum(char * ptr, unsigned int len);
+ 
+/**
+ * @brief Finds and returns the minimum value from a data array.
+ *
+ * Given a pointer to a char array and a length, it finds and returns the
+ * minimum value.
+ *
+ * @param prt Pointer to char array
+ * @param len Array length
+ *
+ * @return Minimum value.
+ */
+char find_minimum(char * ptr, unsigned int len);
+
+/**
+ * @brief Sorts a data array from largest to smalest.
+ *
+ * Given a pointer to a char array and a length, it will sort the array
+ * in descending order (lowest index will have the largest value).
+ *
+ * @param prt Pointer to char array
+ * @param len Array length
+ *
+ * @return void.
+ */
+void sort_array(char * ptr, unsigned int len);
 
 #endif /* __STATS_H__ */
