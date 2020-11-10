@@ -26,7 +26,6 @@
 
 
 #include <stdio.h>
-#include <stdbool.h>
 #include "stats.h"
 
 /* Size of the Data Set */
@@ -40,40 +39,45 @@ void main() {
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
-  /* Other Variable Declarations Go Here */
-  
-  /* Statistics and Printing Functions Go Here */
-  printf("\n---------{ INPUT ARRAY }---------\n");
+  const char str_line[] = "---------------------------------\n\n";
+
+  // Print input array
+  printf("---------{ INPUT ARRAY }---------\n");
   print_array(test, SIZE);
-  printf("---------------------------------\n");
-  
-  printf("\n---------{ STATISTICS }----------\n");
+  printf("%s",str_line);
+
+  // Print statistics
+  printf("---------{ STATISTICS }----------\n");
   print_statistics(test, SIZE);
-  printf("\n---------------------------------\n");
-  
+  printf("%s",str_line);
+
+  // Print sorted array
+  printf("---------{ SORTED ARRAY }--------\n");
   sort_array(test, SIZE);
-  printf("\n---------{ SORTED ARRAY }--------\n");
   print_array(test, SIZE);
-  printf("---------------------------------\n");
+  printf("%s",str_line);
 }
 
 void print_statistics(unsigned char * ptr, unsigned int len){
   printf("  Minimum value: %i\n", find_minimum(ptr, len));
   printf("  Maximum value: %i\n", find_maximum(ptr, len));
   printf("   Median value: %i\n", find_median(ptr, len));
-  printf("     Mean value: %i", find_mean(ptr, len));
+  printf("     Mean value: %i\n", find_mean(ptr, len));
 }
 
 void print_array(unsigned char * ptr, unsigned int len){
   for(int idx=0; idx<len; idx++){
-    // Print padding for allignment.
+    // Prepend padding for allignment.
     if(ptr[idx] < 100){
       printf(" ");
-      if(ptr[idx] < 10) printf(" ");
+      if(ptr[idx] < 10){
+        printf(" ");
+      }
     }
     if(idx%8 == 0) printf( " " );
-    if(idx%8 == 7) printf( "%i\n", ptr[idx]);
-    else printf("%i ", ptr[idx]);
+    // Print array value. Add new line with every 8th item.
+    if(idx%8 != 7) printf( "%i ", ptr[idx]);
+    else printf("%i\n", ptr[idx]);
   }
 }
 
@@ -82,26 +86,33 @@ unsigned char find_median(unsigned char * ptr, unsigned int len){
   // Begin by making a copy.
   unsigned char temp[len];
   for(int idx=0; idx<len; idx++) temp[idx] = ptr[idx];
+
   // Sort the copy.
   sort_array(temp, len);
-  
+
   // Get the median value.
-  unsigned int median = temp[len/2];
+  float median = temp[len/2];
+  // If the matrix has an even number of elements, calculate the
+  // median as the "mean of the two center elements".
   if(len%2 == 0){
     median += temp[len/2-1];
     median /= 2;
   }
-  return( (unsigned char)median );
+  // As the input is integers, I choose to round the result and
+  // return an integer.
+  return((unsigned char)(median+0.5));
 }
 
 unsigned char find_mean(unsigned char * ptr, unsigned int len){
-  unsigned int sum = 0;
+  float sum = 0;
   for(int idx=0; idx<len; idx++){
     sum += ptr[idx];
   }
   // Calculate mean.
   sum /= len;
-  return((unsigned char)sum);
+  // As the input is integers, I choose to round the result and
+  // return an integer.
+  return((unsigned char)(sum+0.5));
 }
 
 unsigned char find_maximum(unsigned char * ptr, unsigned int len){
@@ -121,17 +132,18 @@ unsigned char find_minimum(unsigned char * ptr, unsigned int len){
 }
 
 void sort_array(unsigned char * ptr, unsigned int len){
-  bool done_sorting = false;
-  unsigned char swap = 0;
-  
-  while(!done_sorting){
-    done_sorting = true;
+  unsigned char swaps = 1;
+  // Keep sorting until no swaps was made.
+  while(swaps > 0){
+    swaps = 0;  
+    // Walk through array and swap any adjacent values that
+    // are not orderd correctly.
     for(int idx=0; idx<len-1; idx++){
       if(ptr[idx] < ptr[idx+1]){
-        swap = ptr[idx];
+        unsigned char tmp = ptr[idx];
         ptr[idx] = ptr[idx+1];
-        ptr[idx+1] = swap;
-        done_sorting = false;
+        ptr[idx+1] = tmp;
+        swaps++;
       }
     }
   }
