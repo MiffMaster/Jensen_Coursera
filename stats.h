@@ -28,14 +28,15 @@
 /**
  * @brief Prints array statistics.
  *
- * Given a pointer to a data array, this will print the statistics.
+ * Given a pointer to a data array and length, this will print the statistics.
  * Including minimum, maximum, median, and mean.
  *
  * @param ptr Pointer to char array
+ * @param len Array length
  *
  * @return void.
  */
-void print_statistics(char * ptr);
+void print_statistics(unsigned char * ptr, unsigned int len);
 
 /**
  * @brief Prints an array to the screen.
@@ -48,7 +49,7 @@ void print_statistics(char * ptr);
  *
  * @return void.
  */
-void print_array(char * ptr, unsigned int len);
+void print_array(unsigned char * ptr, unsigned int len);
 
 /**
  * @brief Finds and returns the median value from a data array.
@@ -61,7 +62,7 @@ void print_array(char * ptr, unsigned int len);
  *
  * @return Median value.
  */
-char find_median(char * ptr, unsigned int len);
+unsigned char find_median(unsigned char * ptr, unsigned int len);
 
 /**
  * @brief Finds and returns the mean value from a data array.
@@ -74,7 +75,7 @@ char find_median(char * ptr, unsigned int len);
  *
  * @return Mean value.
  */
-char find_mean(char * ptr, unsigned int len);
+unsigned char find_mean(unsigned char * ptr, unsigned int len);
  
 /**
  * @brief Finds and returns the maximum value from a data array.
@@ -87,7 +88,7 @@ char find_mean(char * ptr, unsigned int len);
  *
  * @return Maximum value.
  */
-char find_maximum(char * ptr, unsigned int len);
+unsigned char find_maximum(unsigned char * ptr, unsigned int len);
  
 /**
  * @brief Finds and returns the minimum value from a data array.
@@ -100,7 +101,7 @@ char find_maximum(char * ptr, unsigned int len);
  *
  * @return Minimum value.
  */
-char find_minimum(char * ptr, unsigned int len);
+unsigned char find_minimum(unsigned char * ptr, unsigned int len);
 
 /**
  * @brief Sorts a data array from largest to smalest.
@@ -113,6 +114,6 @@ char find_minimum(char * ptr, unsigned int len);
  *
  * @return void.
  */
-void sort_array(char * ptr, unsigned int len);
+void sort_array(unsigned char * ptr, unsigned int len);
 
 #endif /* __STATS_H__ */
