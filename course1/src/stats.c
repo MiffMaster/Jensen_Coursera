@@ -135,7 +135,7 @@ void sort_array(unsigned char * ptr, unsigned int len){
   unsigned char swaps = 1;
   // Keep sorting until no swaps was made.
   while(swaps > 0){
-    swaps = 0;  
+    swaps = 0;
     // Walk through array and swap any adjacent values that
     // are not orderd correctly.
     for(int idx=0; idx<len-1; idx++){
