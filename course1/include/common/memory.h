@@ -118,7 +118,8 @@ int32_t * reserve_words(size_t length);
  *
  * @return Pointer to first word
  */
-void free_words(uint32_t * src);
+
+void free_words(int32_t * src);
 
 /**
  * @brief Sets a value of a data array.

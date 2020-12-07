@@ -24,11 +24,10 @@ characters that are not valid for the given base (excluding null-terminator).
 
 I could not find the **zip-file** with provided material, I had to dig these
 files out of the git-repo and I am not completely sure I have the correct
-files. For instance the course1.c recasts the **reserve_words()** (*int32_t* as
-per the instruction) as *uint32_t*, then tries to call **free_word()** causing a
-type-mismatch. Thus I choose to provide both **free_word(int32_t \*)** as well as
-**free_word(uint32_t \*)**, because instructions did not say I could not have
-more functions than the required list ;)
+files. For instance the course1.c would recast the the pointer when calling
+free\_words((uint32\_t \*) instead of the expected int32\_t \* as per the
+instruction. I chose to stick to de specifivation in the instruction and
+insted edit the cours1.c file to recast as (int32\_t \*).
 
 Other than that,
 ## Thank you for your time and honest feedback!
