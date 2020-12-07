@@ -12,7 +12,8 @@
 #------------------------------------------------------------------------------
 # Basic makefile for multi target build
 #
-# Use: make [Build Target] PLATOFRM=[Platform Override]
+# Use: make [Build Target] PLATOFRM=[Override] COURSE1=[Overide] \
+#                          VERBOSE=[Override]
 #
 # Build Targets:
 #      <FILE>.i - Preprocessed output file
@@ -22,17 +23,36 @@
 #      compile-all - Compile without linking
 #      clean - Removes all generated files
 #
-# Platform Overrides:
-#      MSP432 - Build for the embedded target device
-#      HOST - Builds for testing on the host machine
+# Overrides (first option is default):
+# PLATFORM=HOST - Builds for testing on the host machine
+#          MSP432 - Build for the embedded target device
+#
+# COURSE1=FLASE - Outputs c1m1 deliberable
+#         TRUE - Outputs c1m4 deliverable (Course1 final assignment)
+#
+# VERBOSE=FLASE - Dissable debug output
+#         TRUE - Enable debug output
 #
 #------------------------------------------------------------------------------
 
-PROJECT = c1m2
+PROJECT = c1m4
 
 # Platform Overrides - Defaults to HOST
+# If anything other than MSP432, reset to HOST
 ifndef PLATFORM
-	override PLATFORM = HOST
+	ifneq ($(PLATFORN),MSP432)
+		override PLATFORM = HOST
+	endif
+endif
+
+# Enable debug output
+ifndef VERBOSE
+	override VERBOSE = FALSE
+endif
+
+# Switch to Coures1 deliverable
+ifndef COURSE1
+	override COURSE1 = FALSE
 endif
 
 include sources.mk
@@ -46,7 +66,7 @@ CPPFLAGS = -D$(PLATFORM) $(INCLUDES)
 
 # Compiler flags and defines for MSP432
 ifeq ($(PLATFORM),MSP432)
-	LDFLAGS := $(LDFLAGS),-T,../msp432p401r.lds
+	LDFLAGS := $(LDFLAGS),-T,./msp432p401r.lds
 	CFLAGS += -mcpu=cortex-m4 \
 	          -march=armv7e-m \
 	          -mthumb \
@@ -63,6 +83,14 @@ else ifeq ($(PLATFORM),HOST)
 	CC = gcc
 	SIZE = size
 	OBJDUMP = objdump
+endif
+
+ifeq ($(COURSE1),TRUE) 
+	CPPFLAGS += -DCOURSE1
+endif
+
+ifeq ($(VERBOSE),TRUE)
+	CPPFLAGS += -DVERBOSE
 endif
 
 # Build targets
@@ -90,5 +118,6 @@ $(PROJECT).out : $(OBJECTS)
 
 .PHONY: clean
 clean:
-	rm -f *.i *.asm *.o $(PROJECT).out $(PROJECT).map
+	rm -f *.asm $(PROJECT).out $(PROJECT).map
+	rm -f src/*.i src/*.asm src/*.o
 

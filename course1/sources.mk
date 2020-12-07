@@ -15,18 +15,21 @@ ifndef PLATFORM
 endif
 
 # Add your Source files to this variable
-SOURCES=main.c \
-        memory.c
+SOURCES=src/course1.c \
+        src/data.c \
+        src/main.c \
+        src/memory.c \
+        src/stats.c
 
 # Add your include paths to this variable
-INCLUDES=-I../include/common/
+INCLUDES=-I./include/common/
 
 # Add Platform dependent files and paths
 ifeq ($(PLATFORM),MSP432)
-SOURCES += system_msp432p401r.c \
-           startup_msp432p401r_gcc.c \
-           interrupts_msp432p401r_gcc.c
+SOURCES += src/system_msp432p401r.c \
+           src/startup_msp432p401r_gcc.c \
+           src/interrupts_msp432p401r_gcc.c
            
-INCLUDES += -I../include/msp432/ \
-            -I../include/CMSIS/
+INCLUDES += -I./include/msp432/ \
+            -I./include/CMSIS/
 endif

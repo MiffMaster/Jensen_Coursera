@@ -23,62 +23,66 @@
  *
  */
 
-
-
-#include <stdio.h>
+//#include <stdio.h>
 #include "stats.h"
+#include "platform.h"
 
 /* Size of the Data Set */
 #define SIZE (40)
 
-void main() {
-
+void stats() {
   unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
-                              114, 88,   45,  76, 123,  87,  25,  23,
-                              200, 122, 150, 90,   92,  87, 177, 244,
+                              114,  88,  45,  76, 123,  87,  25,  23,
+                              200, 122, 150,  90,  92,  87, 177, 244,
                               201,   6,  12,  60,   8,   2,   5,  67,
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
   const char str_line[] = "---------------------------------\n\n";
 
+	#ifdef VERBOSE
   // Print input array
-  printf("---------{ INPUT ARRAY }---------\n");
+  PRINTF("---------{ INPUT ARRAY }---------\n");
   print_array(test, SIZE);
-  printf("%s",str_line);
-
+  PRINTF("%s",str_line);
+	#endif
+	
   // Print statistics
-  printf("---------{ STATISTICS }----------\n");
+  PRINTF("---------{ STATISTICS }----------\n");
   print_statistics(test, SIZE);
-  printf("%s",str_line);
+  PRINTF("%s",str_line);
 
+	#ifdef VERBOSE
   // Print sorted array
-  printf("---------{ SORTED ARRAY }--------\n");
+  PRINTF("---------{ SORTED ARRAY }--------\n");
   sort_array(test, SIZE);
   print_array(test, SIZE);
-  printf("%s",str_line);
+  PRINTF("%s",str_line);
+  #endif
 }
 
 void print_statistics(unsigned char * ptr, unsigned int len){
-  printf("  Minimum value: %i\n", find_minimum(ptr, len));
-  printf("  Maximum value: %i\n", find_maximum(ptr, len));
-  printf("   Median value: %i\n", find_median(ptr, len));
-  printf("     Mean value: %i\n", find_mean(ptr, len));
+  PRINTF("  Minimum value: %i\n", find_minimum(ptr, len));
+  PRINTF("  Maximum value: %i\n", find_maximum(ptr, len));
+  PRINTF("   Median value: %i\n", find_median(ptr, len));
+  PRINTF("     Mean value: %i\n", find_mean(ptr, len));
 }
 
 void print_array(unsigned char * ptr, unsigned int len){
+#ifdef VERBOSE
   for(int idx=0; idx<len; idx++){
     // Prepend padding for allignment.
     if(ptr[idx] < 100){
-      printf(" ");
+      PRINTF(" ");
       if(ptr[idx] < 10){
-        printf(" ");
+        PRINTF(" ");
       }
     }
-    if(idx%8 == 0) printf( " " );
+    if(idx%8 == 0) PRINTF( " " );
     // Print array value. Add new line with every 8th item.
-    if(idx%8 != 7) printf( "%i ", ptr[idx]);
-    else printf("%i\n", ptr[idx]);
+    if(idx%8 != 7) PRINTF( "%i ", ptr[idx]);
+    else PRINTF("%i\n", ptr[idx]);
   }
+#endif
 }
 
 unsigned char find_median(unsigned char * ptr, unsigned int len){

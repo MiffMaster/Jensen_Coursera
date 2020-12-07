@@ -20,11 +20,94 @@
  * @date April 1 2017
  *
  */
+
+#include <stdint.h>
+#include <stddef.h>
+#include <stdlib.h>
 #include "memory.h"
 
 /***********************************************************
  Function Definitions
 ***********************************************************/
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
+	uint8_t * ptr = dst;
+	uint8_t temp;
+	
+	if (dst < src) {
+		for (; dst < ptr+length; dst++, src++) {
+			temp = *dst;
+			*dst = *src;
+			*src = temp;
+		}
+	}
+	else if (dst > src) {
+	  dst += length-1;
+	  src += length-1;
+		for (; dst >= ptr; dst--, src--) {
+			temp = *dst;
+			*dst = *src;
+			*src = temp;
+		}
+	}
+	return ptr;
+}
+
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
+	uint8_t * ptr = dst;
+	
+	if (dst < src) {
+		for (; dst < ptr+length; dst++, src++) {
+			*dst = *src;
+		}
+	}
+	else if (dst > src) {
+	  dst += length-1;
+	  src += length-1;
+		for (; dst >= ptr; dst--, src--) {
+			*dst = *src;
+		}
+	}
+	return ptr;
+}
+
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value){
+	uint8_t * ptr = src; // Save for later.
+	
+	for (; src < ptr+length; src++) {
+		*src = value;
+	}
+	return ptr;
+}
+
+uint8_t * my_memzero(uint8_t * src, size_t length){
+	return my_memset(src, length, 0);
+}
+
+uint8_t * my_reverse(uint8_t * src, size_t length){
+	uint8_t temp;
+	uint8_t * start = src;
+	uint8_t * end = src+length-1;
+	
+	for (; start < end; start++, end--) {
+		temp = *end;
+		*end = *start;
+		*start = temp;
+	}
+	return src;
+}
+
+int32_t * reserve_words(size_t length){
+	return (int32_t *)malloc(length*4);
+}
+
+void free_words(uint32_t * src){
+	free(src);
+}
+
+void free_words(int32_t * src){
+	free(src);
+}
+
 void set_value(char * ptr, unsigned int index, char value){
   ptr[index] = value;
 }

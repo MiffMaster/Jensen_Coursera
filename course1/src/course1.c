@@ -105,7 +105,6 @@ int8_t test_memmove1() {
   {
     set[i] = i;
   }
-
   print_array(set, MEM_SET_SIZE_B);
   my_memmove(ptra, ptrb, TEST_MEMMOVE_LENGTH);
   print_array(set, MEM_SET_SIZE_B);

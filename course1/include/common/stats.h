@@ -26,6 +26,15 @@
 #define __STATS_H__
 
 /**
+ * @brief Prints the c1m1 deliverable.
+ *
+ * Runs and prints the tests for the c1m1 assignment.
+ *
+ * @return void.
+ */
+void stats();
+
+/**
  * @brief Prints array statistics.
  *
  * Given a pointer to a data array and length, this will print the statistics.
